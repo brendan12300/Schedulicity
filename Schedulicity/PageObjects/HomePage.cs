@@ -27,7 +27,8 @@ namespace Schedulicity.PageObjects
 
         public void GoToPage()
         {
-            driver.Navigate().GoToUrl("https://www.way2automation.com/protractor-angularjs-practice-website.html");
+            // url not loading with Selenium unless I use https in the front of the url.
+            driver.Navigate().GoToUrl("https://www.way2automation.com/protractor-angularjs-practice-website.html"); 
         }
 
         public RegistrationPage GoToRegistration()
