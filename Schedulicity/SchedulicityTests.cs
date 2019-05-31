@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -17,15 +18,18 @@ namespace Schedulicity
         {
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(20);
+            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(5);
         }
 
         [TestMethod]
         public void RegSuccess()
         {
+            string successMeassage = "You're logged in!!";
             HomePage home = new HomePage(driver);
             home.GoToPage();
-            home.GoToRegistration();
+            RegistrationPage reg = home.GoToRegistration();
+            reg.Login();
+            Assert.AreEqual(successMeassage, reg.loginSuccessText.Text);
         }
 
         [TestCleanup]

@@ -20,22 +20,23 @@ namespace Schedulicity.PageObjects
         }
 
         [FindsBy(How = How.CssSelector, Using = "li:nth-child(1) h2")]
-        private IWebElement registration;
+        public IWebElement registration;
 
         [FindsBy(How = How.CssSelector, Using = "li:nth-child(6) h2")]
-        private IWebElement webTables;
+        public IWebElement webTables;
 
         public void GoToPage()
         {
             // url not loading with Selenium unless I use https in the front of the url.
-            driver.Navigate().GoToUrl("https://www.way2automation.com/protractor-angularjs-practice-website.html"); 
+            driver.Navigate().GoToUrl("http://www.way2automation.com/protractor-angularjs-practice-website.html"); 
         }
 
         public RegistrationPage GoToRegistration()
         {
-            Thread.Sleep(1000);
             registration.Click();
+            driver.Navigate().GoToUrl("http://www.way2automation.com/angularjs-protractor/registeration/#/login");
             return new RegistrationPage(driver);
+            
         }
     }
 }
