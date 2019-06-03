@@ -30,13 +30,13 @@ namespace Schedulicity.PageObjects
         }
 
         /// <summary>
-        /// Gets selector for registration page link.
+        /// Gets or sets selector for registration page link.
         /// </summary>
         [FindsBy(How = How.CssSelector, Using = "li:nth-child(1) h2")]
         public IWebElement Registration { get; set; }
 
         /// <summary>
-        ///  Gets selector for Web tables page link.
+        ///  Gets or sets selector for Web tables page link.
         /// </summary>
         [FindsBy(How = How.CssSelector, Using = "li:nth-child(6) h2")]
         public IWebElement WebTables { get; set; }

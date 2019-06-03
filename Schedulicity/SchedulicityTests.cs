@@ -19,53 +19,66 @@ namespace Schedulicity
     [TestClass]
     public class SchedulicityTests
     {
+        /// <summary>
+        /// web driver instance
+        /// </summary>
         private IWebDriver driver;
 
+        /// <summary>
+        /// Sets up Chrome driver and maximizes the browser window for test
+        /// </summary>
         [TestInitialize]
         public void Setup()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(5);
+            this.driver = new ChromeDriver();
+            this.driver.Manage().Window.Maximize();
+            this.driver.Manage().Timeouts().AsynchronousJavaScript = TimeSpan.FromSeconds(5);
         }
 
+        /// <summary>
+        /// Does the test for exercise 1.
+        /// </summary>
         [TestMethod]
         public void RegSuccess()
         {
-            HomePage home = new HomePage(driver);
+            HomePage home = new HomePage(this.driver);
             home.GoToPage();
             RegistrationPage reg = home.GoToRegistration();
-            driver.SwitchTo().Window(driver.WindowHandles[1]);
+            this.driver.SwitchTo().Window(this.driver.WindowHandles[1]);
             reg.TestsRegisration(true);
-            driver.Quit();
+            this.driver.Quit();
         }
 
+        /// <summary>
+        /// Does the test for exercise 2.
+        /// </summary>
         [TestMethod]
         public void RegFail()
         {
-            HomePage home = new HomePage(driver);
+            HomePage home = new HomePage(this.driver);
             home.GoToPage();
             RegistrationPage reg = home.GoToRegistration();
-            driver.SwitchTo().Window(driver.WindowHandles[1]);
+            this.driver.SwitchTo().Window(this.driver.WindowHandles[1]);
             reg.TestsRegisration(false);
-            driver.Quit();
+            this.driver.Quit();
         }
 
+        /// <summary>
+        /// Does the test for exercise 3.
+        /// </summary>
         [DataTestMethod]
         public void DeleteAdmin()
         {
-            HomePage home = new HomePage(driver);
+            HomePage home = new HomePage(this.driver);
             home.GoToPage();
             WebTablesPage webTables = home.GoToWebTables();
-            driver.SwitchTo().Window(driver.WindowHandles[1]);
+            this.driver.SwitchTo().Window(this.driver.WindowHandles[1]);
             webTables.FindAdminUserAndDeleteButton();
             DeletePopup deletePopup = webTables.DeleteAdmin();
             webTables = deletePopup.ClickOk();
             webTables.FindAdminUserAndDeleteButton();
             Assert.IsNull(webTables.AdminDeleteButton);
-            driver.Quit();
+            this.driver.Quit();
         }
-
-       
     }
 }
