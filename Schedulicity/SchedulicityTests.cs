@@ -24,18 +24,26 @@ namespace Schedulicity
         [TestMethod]
         public void RegSuccess()
         {
-            string successMeassage = "You're logged in!!";
+           
             HomePage home = new HomePage(driver);
             home.GoToPage();
             RegistrationPage reg = home.GoToRegistration();
-            reg.Login();
-            Assert.AreEqual(successMeassage, reg.loginSuccessText.Text);
+            driver.SwitchTo().Window(driver.WindowHandles[1]);
+            reg.Login(true);
+            driver.Quit();
         }
 
-        [TestCleanup]
-        public void CleanUp()
+        [TestMethod]
+        public void RegFail()
         {
-            driver.Close();
+            HomePage home = new HomePage(driver);
+            home.GoToPage();
+            RegistrationPage reg = home.GoToRegistration();
+            driver.SwitchTo().Window(driver.WindowHandles[1]);
+            reg.Login(false);
+            driver.Quit();
         }
+
+       
     }
 }
